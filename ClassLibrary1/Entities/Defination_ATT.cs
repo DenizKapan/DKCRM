@@ -8,11 +8,10 @@ namespace DKCRM.Core.Entities
 {
     public class Defination_ATT : Defination
     {
-        public int ID { get; set; }
-        public DateTime InDate { get; set; } = DateTime.Now;
         public int AttributeID { get; set; }
+        public DateTime InDate { get; set; } = DateTime.Now;
         public string? AttributeName { get; set; }
-        public Defination DefinationID { get; set; }
+        public virtual List<Defination?> DefinationID { get; set; }
         public bool DisplayFlag { get; set; }
     }
 }

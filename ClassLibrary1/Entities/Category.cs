@@ -8,9 +8,10 @@ namespace DKCRM.Core.Entities
 {
     public class Category : IEntitiy
     {
-        public int ID { get; set; }
+        public int CategoryID { get; set; }
         public DateTime InDate { get; set; } = DateTime.Now;
         public string CategoryName { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }

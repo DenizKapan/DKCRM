@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
@@ -67,9 +67,9 @@
                 @Html.DisplayFor(modelItem => item.IsAdmin)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UserID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>
             </td>
         </tr>
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DKCRM.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230906112611_sondurum")]
-    partial class sondurum
+    [Migration("20230907204117_baslangic")]
+    partial class baslangic
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,16 +33,13 @@ namespace DKCRM.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("CityCodeID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CustomerIDID")
+                    b.Property<int>("CityCodeCityID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DistrictCodeID")
+                    b.Property<int?>("DistrictCodeCityID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InDate")
@@ -50,22 +47,20 @@ namespace DKCRM.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CityCodeID");
+                    b.HasIndex("CityCodeCityID");
 
-                    b.HasIndex("CustomerIDID");
-
-                    b.HasIndex("DistrictCodeID");
+                    b.HasIndex("DistrictCodeCityID");
 
                     b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("DKCRM.Core.Entities.Category", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -74,26 +69,30 @@ namespace DKCRM.Data.Migrations
                     b.Property<DateTime>("InDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ID");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("CategoryID");
 
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            ID = 1,
+                            CategoryID = 1,
                             CategoryName = "Şikayet",
-                            InDate = new DateTime(2023, 9, 6, 14, 26, 11, 596, DateTimeKind.Local).AddTicks(4217)
+                            InDate = new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6304),
+                            IsActive = false
                         });
                 });
 
             modelBuilder.Entity("DKCRM.Core.Entities.City", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("CityID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityID"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -106,7 +105,7 @@ namespace DKCRM.Data.Migrations
                     b.Property<DateTime>("InDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ID");
+                    b.HasKey("CityID");
 
                     b.ToTable("Cities");
 
@@ -117,19 +116,19 @@ namespace DKCRM.Data.Migrations
                     b.HasData(
                         new
                         {
-                            ID = 1,
+                            CityID = 1,
                             Description = "Adana",
-                            InDate = new DateTime(2023, 9, 6, 14, 26, 11, 596, DateTimeKind.Local).AddTicks(4203)
+                            InDate = new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6283)
                         });
                 });
 
             modelBuilder.Entity("DKCRM.Core.Entities.Customer", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("CustomerID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
 
                     b.Property<DateTime>("InDate")
                         .HasColumnType("datetime2");
@@ -140,18 +139,18 @@ namespace DKCRM.Data.Migrations
                     b.Property<string>("SurName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("CustomerID");
 
                     b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("DKCRM.Core.Entities.Defination", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("DefinationID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DefinationID"));
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -159,7 +158,7 @@ namespace DKCRM.Data.Migrations
                     b.Property<DateTime>("InDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ID");
+                    b.HasKey("DefinationID");
 
                     b.ToTable("Definations");
                 });
@@ -182,11 +181,11 @@ namespace DKCRM.Data.Migrations
 
             modelBuilder.Entity("DKCRM.Core.Entities.Request", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("RequestID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RequestID"));
 
                     b.Property<bool>("DisplayFlag")
                         .HasColumnType("bit");
@@ -195,62 +194,29 @@ namespace DKCRM.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RequestName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("RequestID");
 
                     b.ToTable("Requests");
 
                     b.HasData(
                         new
                         {
-                            ID = 1,
+                            RequestID = 1,
                             DisplayFlag = false,
-                            InDate = new DateTime(2023, 9, 6, 14, 26, 11, 596, DateTimeKind.Local).AddTicks(4236),
+                            InDate = new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6320),
                             RequestName = "Geç Teslim"
-                        });
-                });
-
-            modelBuilder.Entity("DKCRM.Core.Entities.SolutionGroup", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<bool>("DisplayFlag")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("InDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SolutionName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("SolutionGroups");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            DisplayFlag = true,
-                            InDate = new DateTime(2023, 9, 6, 14, 26, 11, 596, DateTimeKind.Local).AddTicks(4249),
-                            SolutionName = "BackOffice"
                         });
                 });
 
             modelBuilder.Entity("DKCRM.Core.Entities.Statu", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("StatuID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatuID"));
 
                     b.Property<DateTime>("InDate")
                         .HasColumnType("datetime2");
@@ -261,21 +227,18 @@ namespace DKCRM.Data.Migrations
                     b.Property<string>("StatuName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("StatuID");
 
                     b.ToTable("Status");
                 });
 
             modelBuilder.Entity("DKCRM.Core.Entities.Telephone", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("TelephoneID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("CustomerIDID")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TelephoneID"));
 
                     b.Property<DateTime>("InDate")
                         .HasColumnType("datetime2");
@@ -289,9 +252,7 @@ namespace DKCRM.Data.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("CustomerIDID");
+                    b.HasKey("TelephoneID");
 
                     b.ToTable("Telephones");
                 });
@@ -307,27 +268,12 @@ namespace DKCRM.Data.Migrations
                     b.Property<DateTime>("InDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PersonelIDID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RequestIdID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SolutionIDID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StatuIDID")
+                    b.Property<int?>("PersonelIDUserID")
                         .HasColumnType("int");
 
                     b.HasKey("TicketID");
 
-                    b.HasIndex("PersonelIDID");
-
-                    b.HasIndex("RequestIdID");
-
-                    b.HasIndex("SolutionIDID");
-
-                    b.HasIndex("StatuIDID");
+                    b.HasIndex("PersonelIDUserID");
 
                     b.ToTable("Tickets");
                 });
@@ -346,28 +292,18 @@ namespace DKCRM.Data.Migrations
                     b.Property<DateTime>("InDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PersonelIDID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TicketID1")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("PersonelIDID");
-
-                    b.HasIndex("TicketID1");
 
                     b.ToTable("Ticket_ATTs");
                 });
 
             modelBuilder.Entity("DKCRM.Core.Entities.User", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -397,16 +333,16 @@ namespace DKCRM.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("UserID");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            ID = 1,
+                            UserID = 1,
                             Email = "admin@kapan.com",
-                            InDate = new DateTime(2023, 9, 6, 14, 26, 11, 596, DateTimeKind.Local).AddTicks(4054),
+                            InDate = new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6119),
                             IsAdmin = true,
                             Name = "Deniz",
                             Password = "010203",
@@ -414,9 +350,9 @@ namespace DKCRM.Data.Migrations
                         },
                         new
                         {
-                            ID = 2,
+                            UserID = 2,
                             Email = "bo@kapan.com",
-                            InDate = new DateTime(2023, 9, 6, 14, 26, 11, 596, DateTimeKind.Local).AddTicks(4068),
+                            InDate = new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6138),
                             IsBO = true,
                             Name = "Deniz",
                             Password = "010203",
@@ -424,9 +360,9 @@ namespace DKCRM.Data.Migrations
                         },
                         new
                         {
-                            ID = 3,
+                            UserID = 3,
                             Email = "agent@kapan.com",
-                            InDate = new DateTime(2023, 9, 6, 14, 26, 11, 596, DateTimeKind.Local).AddTicks(4070),
+                            InDate = new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6141),
                             IsAgent = true,
                             Name = "Deniz",
                             Password = "010203",
@@ -438,13 +374,11 @@ namespace DKCRM.Data.Migrations
                 {
                     b.HasBaseType("DKCRM.Core.Entities.City");
 
-                    b.Property<int>("CityCodeID")
-                        .HasColumnType("int");
-
                     b.Property<int>("DistrictCode")
                         .HasColumnType("int");
 
-                    b.HasIndex("CityCodeID");
+                    b.Property<int>("ID")
+                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("District");
                 });
@@ -453,93 +387,26 @@ namespace DKCRM.Data.Migrations
                 {
                     b.HasOne("DKCRM.Core.Entities.City", "CityCode")
                         .WithMany()
-                        .HasForeignKey("CityCodeID");
-
-                    b.HasOne("DKCRM.Core.Entities.Customer", "CustomerID")
-                        .WithMany()
-                        .HasForeignKey("CustomerIDID");
-
-                    b.HasOne("DKCRM.Core.Entities.District", "DistrictCode")
-                        .WithMany()
-                        .HasForeignKey("DistrictCodeID");
-
-                    b.Navigation("CityCode");
-
-                    b.Navigation("CustomerID");
-
-                    b.Navigation("DistrictCode");
-                });
-
-            modelBuilder.Entity("DKCRM.Core.Entities.Telephone", b =>
-                {
-                    b.HasOne("DKCRM.Core.Entities.Customer", "CustomerID")
-                        .WithMany()
-                        .HasForeignKey("CustomerIDID")
+                        .HasForeignKey("CityCodeCityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CustomerID");
+                    b.HasOne("DKCRM.Core.Entities.District", "DistrictCode")
+                        .WithMany()
+                        .HasForeignKey("DistrictCodeCityID");
+
+                    b.Navigation("CityCode");
+
+                    b.Navigation("DistrictCode");
                 });
 
             modelBuilder.Entity("DKCRM.Core.Entities.Ticket", b =>
                 {
                     b.HasOne("DKCRM.Core.Entities.User", "PersonelID")
                         .WithMany()
-                        .HasForeignKey("PersonelIDID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DKCRM.Core.Entities.Request", "RequestId")
-                        .WithMany()
-                        .HasForeignKey("RequestIdID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DKCRM.Core.Entities.SolutionGroup", "SolutionID")
-                        .WithMany()
-                        .HasForeignKey("SolutionIDID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DKCRM.Core.Entities.Statu", "StatuID")
-                        .WithMany()
-                        .HasForeignKey("StatuIDID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PersonelIDUserID");
 
                     b.Navigation("PersonelID");
-
-                    b.Navigation("RequestId");
-
-                    b.Navigation("SolutionID");
-
-                    b.Navigation("StatuID");
-                });
-
-            modelBuilder.Entity("DKCRM.Core.Entities.Ticket_ATT", b =>
-                {
-                    b.HasOne("DKCRM.Core.Entities.User", "PersonelID")
-                        .WithMany()
-                        .HasForeignKey("PersonelIDID");
-
-                    b.HasOne("DKCRM.Core.Entities.Ticket", "TicketID")
-                        .WithMany()
-                        .HasForeignKey("TicketID1");
-
-                    b.Navigation("PersonelID");
-
-                    b.Navigation("TicketID");
-                });
-
-            modelBuilder.Entity("DKCRM.Core.Entities.District", b =>
-                {
-                    b.HasOne("DKCRM.Core.Entities.City", "CityCode")
-                        .WithMany()
-                        .HasForeignKey("CityCodeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CityCode");
                 });
 #pragma warning restore 612, 618
         }

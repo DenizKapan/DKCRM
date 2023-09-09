@@ -11,9 +11,9 @@ namespace DKCRM.Core.Entities
         public int ID { get; set; }
         public DateTime InDate { get; set; } = DateTime.Now;
         public string? Description { get; set; }
-        //public Customer CustomerID { get; set; }
-        public City CityCode { get; set; }
-        public District? DistrictCode { get; set; }
+        //public virtual Customer? CustomerID { get; set; }
+        public virtual City CityCode { get; set; }
+        public virtual District? DistrictCode { get; set; }
 
     }
 }

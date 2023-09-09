@@ -38,12 +38,14 @@ namespace DKCRM.UI.Areas.Admin.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(User collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
-            }
+                _service.Add(collection);
+				await _service.SaveAsync();
+				return RedirectToAction(nameof(Index));
+			}
             catch
             {
                 return View();
@@ -51,20 +53,23 @@ namespace DKCRM.UI.Areas.Admin.Controllers
         }
 
         // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
-        }
+			var model = await _service.FindAsync(id);
+			return View(model);
+		}
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, User collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
-            }
+				_service.Update(collection);
+				await _service.SaveAsync();
+				return RedirectToAction(nameof(Index));
+			}
             catch
             {
                 return View();
@@ -72,20 +77,23 @@ namespace DKCRM.UI.Areas.Admin.Controllers
         }
 
         // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
-        }
+			var model = await _service.FindAsync(id);
+			return View(model);
+		}
 
         // POST: UserController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, User collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
-            }
+				_service.Delete(collection);
+				await _service.SaveAsync();
+				return RedirectToAction(nameof(Index));
+			}
             catch
             {
                 return View();

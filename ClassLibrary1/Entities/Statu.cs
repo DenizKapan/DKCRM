@@ -8,7 +8,7 @@ namespace DKCRM.Core.Entities
 {
     public class Statu
     {
-        public int ID { get; set; }
+        public int StatuID { get; set; }
         public DateTime InDate { get; set; } = DateTime.Now;
         public string? StatuName { get; set; }
         public int? StatuCode { get; set;}

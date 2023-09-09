@@ -19,8 +19,7 @@ namespace DKCRM.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Defination> Definations { get; set; }
         public DbSet<District> Districts { get; set; }
-        public DbSet<Request> Requests { get; set; }        
-        public DbSet<SolutionGroup> SolutionGroups { get; set; }
+        public DbSet<Request> Requests { get; set; }
         public DbSet<Statu> Status { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
@@ -38,7 +37,7 @@ namespace DKCRM.Data
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
-                    ID = 1,
+                    UserID = 1,
                     Email = "admin@kapan.com",
                     Name = "Deniz",
                     SurName = "Kapan",
@@ -47,7 +46,7 @@ namespace DKCRM.Data
                 },
                 new User
                 {
-                    ID = 2,
+                    UserID = 2,
                     Email = "bo@kapan.com",
                     Name = "Deniz",
                     SurName = "Kapan",
@@ -56,7 +55,7 @@ namespace DKCRM.Data
                 },
                 new User
                 {
-                    ID = 3,
+                    UserID = 3,
                     Email = "agent@kapan.com",
                     Name = "Deniz",
                     SurName = "Kapan",
@@ -67,29 +66,22 @@ namespace DKCRM.Data
             modelBuilder.Entity<City>().HasData(
                 new City
                 {
-                    ID = 1,
+                    CityID = 1,
                     Description = "Adana"
                 });
             modelBuilder.Entity<Category>().HasData(
                 new Category
                 {
-                    ID = 1,
+                    CategoryID = 1,
                     CategoryName = "Şikayet"                    
                 });
             modelBuilder.Entity<Request>().HasData(
                 new Request
                 {
-                    ID = 1,
+                    RequestID = 1,
                     RequestName = "Geç Teslim"
                 });
-            modelBuilder.Entity<SolutionGroup>().HasData(
-                new SolutionGroup
-                {
-                    ID = 1,
-                    SolutionName = "BackOffice",
-                    DisplayFlag = true
-                });
-
+           
             base.OnModelCreating(modelBuilder);
         }
     }

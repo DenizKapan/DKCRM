@@ -8,7 +8,6 @@ namespace DKCRM.Core.Entities
 {
     public interface IEntitiy
     {
-        int ID { get; set; }
         public DateTime InDate { get; set; }
     }
 }

@@ -14,54 +14,42 @@ namespace DKCRM.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    CategoryID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.ID);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    CityID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: true),
                     DistrictCode = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cities", x => x.ID);
+                    table.PrimaryKey("PK_Cities", x => x.CityID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    CustomerID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -69,21 +57,21 @@ namespace DKCRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.ID);
+                    table.PrimaryKey("PK_Customers", x => x.CustomerID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Definations",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    DefinationID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Definations", x => x.ID);
+                    table.PrimaryKey("PK_Definations", x => x.DefinationID);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,37 +91,22 @@ namespace DKCRM.Data.Migrations
                 name: "Requests",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    RequestID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RequestName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RequestName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DisplayFlag = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Requests", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SolutionGroups",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SolutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DisplayFlag = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SolutionGroups", x => x.ID);
+                    table.PrimaryKey("PK_Requests", x => x.RequestID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Status",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    StatuID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StatuName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -141,14 +114,14 @@ namespace DKCRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Status", x => x.ID);
+                    table.PrimaryKey("PK_Status", x => x.StatuID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Telephones",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    TelephoneID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PrefixCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -157,7 +130,7 @@ namespace DKCRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Telephones", x => x.ID);
+                    table.PrimaryKey("PK_Telephones", x => x.TelephoneID);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,23 +148,10 @@ namespace DKCRM.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tickets",
-                columns: table => new
-                {
-                    TicketID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tickets", x => x.TicketID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    UserID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -204,38 +164,94 @@ namespace DKCRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.ID);
+                    table.PrimaryKey("PK_Users", x => x.UserID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CityCodeCityID = table.Column<int>(type: "int", nullable: false),
+                    DistrictCodeCityID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Cities_CityCodeCityID",
+                        column: x => x.CityCodeCityID,
+                        principalTable: "Cities",
+                        principalColumn: "CityID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Cities_DistrictCodeCityID",
+                        column: x => x.DistrictCodeCityID,
+                        principalTable: "Cities",
+                        principalColumn: "CityID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    TicketID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PersonelIDUserID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.TicketID);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Users_PersonelIDUserID",
+                        column: x => x.PersonelIDUserID,
+                        principalTable: "Users",
+                        principalColumn: "UserID");
                 });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "ID", "CategoryName", "InDate" },
-                values: new object[] { 1, "Şikayet", new DateTime(2023, 9, 6, 14, 24, 1, 36, DateTimeKind.Local).AddTicks(5724) });
+                columns: new[] { "CategoryID", "CategoryName", "InDate", "IsActive" },
+                values: new object[] { 1, "Şikayet", new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6304), false });
 
             migrationBuilder.InsertData(
                 table: "Cities",
-                columns: new[] { "ID", "Description", "Discriminator", "InDate" },
-                values: new object[] { 1, "Adana", "City", new DateTime(2023, 9, 6, 14, 24, 1, 36, DateTimeKind.Local).AddTicks(5708) });
+                columns: new[] { "CityID", "Description", "Discriminator", "InDate" },
+                values: new object[] { 1, "Adana", "City", new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6283) });
 
             migrationBuilder.InsertData(
                 table: "Requests",
-                columns: new[] { "ID", "DisplayFlag", "InDate", "RequestName" },
-                values: new object[] { 1, false, new DateTime(2023, 9, 6, 14, 24, 1, 36, DateTimeKind.Local).AddTicks(5737), "Geç Teslim" });
-
-            migrationBuilder.InsertData(
-                table: "SolutionGroups",
-                columns: new[] { "ID", "DisplayFlag", "InDate", "SolutionName" },
-                values: new object[] { 1, true, new DateTime(2023, 9, 6, 14, 24, 1, 36, DateTimeKind.Local).AddTicks(5751), "BackOffice" });
+                columns: new[] { "RequestID", "DisplayFlag", "InDate", "RequestName" },
+                values: new object[] { 1, false, new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6320), "Geç Teslim" });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "ID", "Email", "InDate", "IsAdmin", "IsAgent", "IsBO", "Name", "Password", "SurName" },
+                columns: new[] { "UserID", "Email", "InDate", "IsAdmin", "IsAgent", "IsBO", "Name", "Password", "SurName" },
                 values: new object[,]
                 {
-                    { 1, "admin@kapan.com", new DateTime(2023, 9, 6, 14, 24, 1, 36, DateTimeKind.Local).AddTicks(5564), true, null, null, "Deniz", "010203", "Kapan" },
-                    { 2, "bo@kapan.com", new DateTime(2023, 9, 6, 14, 24, 1, 36, DateTimeKind.Local).AddTicks(5575), null, null, true, "Deniz", "010203", "Kapan" },
-                    { 3, "agent@kapan.com", new DateTime(2023, 9, 6, 14, 24, 1, 36, DateTimeKind.Local).AddTicks(5576), null, true, null, "Deniz", "010203", "Kapan" }
+                    { 1, "admin@kapan.com", new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6119), true, null, null, "Deniz", "010203", "Kapan" },
+                    { 2, "bo@kapan.com", new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6138), null, null, true, "Deniz", "010203", "Kapan" },
+                    { 3, "agent@kapan.com", new DateTime(2023, 9, 7, 23, 41, 17, 55, DateTimeKind.Local).AddTicks(6141), null, true, null, "Deniz", "010203", "Kapan" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_CityCodeCityID",
+                table: "Addresses",
+                column: "CityCodeCityID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_DistrictCodeCityID",
+                table: "Addresses",
+                column: "DistrictCodeCityID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_PersonelIDUserID",
+                table: "Tickets",
+                column: "PersonelIDUserID");
         }
 
         /// <inheritdoc />
@@ -246,9 +262,6 @@ namespace DKCRM.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Customers");
@@ -263,9 +276,6 @@ namespace DKCRM.Data.Migrations
                 name: "Requests");
 
             migrationBuilder.DropTable(
-                name: "SolutionGroups");
-
-            migrationBuilder.DropTable(
                 name: "Status");
 
             migrationBuilder.DropTable(
@@ -276,6 +286,9 @@ namespace DKCRM.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tickets");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Users");

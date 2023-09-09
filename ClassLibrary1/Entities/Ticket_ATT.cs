@@ -10,9 +10,9 @@ namespace DKCRM.Core.Entities
     {
         public int ID { get; set; }
         public DateTime InDate { get; set; } = DateTime.Now;
-        public Ticket? TicketID { get; set; }
+        //public virtual Ticket? TicketID { get; set; }
         public string? ATTValue { get; set; }
-        public User? PersonelID { get; set; }
+        //public virtual User? UserID { get; set; }
 
     }
 }

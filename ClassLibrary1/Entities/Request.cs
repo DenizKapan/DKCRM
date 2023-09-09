@@ -8,11 +8,11 @@ namespace DKCRM.Core.Entities
 {
     public class Request : IEntitiy
     {
-        public int ID { get; set; }
+        public int RequestID { get; set; }
         public DateTime InDate { get; set; } = DateTime.Now;
-        public string RequestName { get; set; }
+        public string? RequestName { get; set; }
         public bool DisplayFlag { get; set; }
-       // public Category? CategoryID { get; set; }
-        //public SolutionGroup? SolutionID { get; set; }
+        //public virtual Category? CategoryID { get; set; }
+        
     }
 }

@@ -8,7 +8,7 @@ namespace DKCRM.Core.Entities
 {
     public class User : IEntitiy
     {
-        public int ID { get; set; }
+        public int UserID { get; set; }
         public DateTime InDate { get; set; } = DateTime.Now;
         public string Name { get; set; }
         public string SurName { get; set; }

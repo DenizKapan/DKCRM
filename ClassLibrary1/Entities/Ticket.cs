@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace DKCRM.Core.Entities
 {
-    public class Ticket 
+    public class Ticket : IEntitiy
     {
         public int TicketID { get; set; }
         public DateTime InDate { get; set; } = DateTime.Now;
-        public Request RequestId { get; set; }
-        public User PersonelID { get; set; }
-        public SolutionGroup SolutionID { get; set; }
-        public Statu StatuID { get; set; }
+        //public virtual Request? RequestID { get; set; }
+        public virtual User? PersonelID { get; set; }
+        //public virtual Statu? StatuID { get; set; }
+        //public virtual Customer? CustomerID { get; set;}
     }
 }

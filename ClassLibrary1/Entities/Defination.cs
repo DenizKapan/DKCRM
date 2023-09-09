@@ -8,7 +8,7 @@ namespace DKCRM.Core.Entities
 {
     public class Defination : IEntitiy
     {
-        public int ID { get; set; }
+        public int DefinationID { get; set; }
         public DateTime InDate { get; set; } = DateTime.Now;
         public string? Description { get; set; }
     }

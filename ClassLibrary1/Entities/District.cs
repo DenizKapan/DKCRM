@@ -11,6 +11,6 @@ namespace DKCRM.Core.Entities
         public int ID { get; set; }
         public string Description { get; set; }
         public int DistrictCode { get; set; }
-        public City CityCode { get; set; }
+        public virtual List<City> CityID { get; set; }
     }
 }
