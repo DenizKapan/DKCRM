@@ -19,7 +19,7 @@ namespace DKCRM.Data.Concrate
 
         public async Task<District> GetDistrict(int id)
         {
-            return await _context.Districts.AsNoTracking().Include(p => p.CityID).ToListAsync(); //-- _context.Districts.AsNoTracking().Include(p => p.CityID).ToListAsync();
+            //return await _context.Districts.AsNoTracking().Include(p => p.CityID).ToListAsync();
         }
 
         public Task<List<District>> GetDistrict()

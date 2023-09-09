@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\DKCRM.Core.csproj" />
+    <ProjectReference Include="..\DKCRM.Core\DKCRM.Core.csproj" />
   </ItemGroup>
 
 </Project>

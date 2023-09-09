@@ -21,7 +21,7 @@ namespace DKCRM.UI.Areas.Admin.Controllers
         // GET: DistrictsController
         public async Task<ActionResult> Index()
         {
-            var model = await _serviceDistrict.get();
+            var model = await _serviceDistrict.GetAllAsync();
             return View(model);
             return View();
         }
@@ -66,7 +66,7 @@ namespace DKCRM.UI.Areas.Admin.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -87,7 +87,7 @@ namespace DKCRM.UI.Areas.Admin.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
